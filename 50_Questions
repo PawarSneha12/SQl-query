@@ -1,0 +1,77 @@
+create DATABASE ORG;
+USE ORG;
+-- show DATABASES;
+CREATE TABLE  Workers(
+w_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+f_name CHAR(25),
+l_name CHAR(25),
+salary INT(15),
+joingData DATETIME,
+DEPARTMENT CHAR(15)
+);
+INSERT INTO Workers(w_id,f_name,l_name,salary,joingData,DEPARTMENT) VALUES 
+(01,'MONIK    ','ARORA',100000,'14-02-20 09.00.00','HR'),
+(02,'NIHAR','VERMA',80000,'14-06,11 09.00.00','Admin'),
+(03,'VISHA','SINGHAL',300000,'14-02-20 09.00.00','HR'),
+(04,'AMITA','SINGH',500000,'14-02-20 09.00.00','Admin'),
+(05,'VIVEK','BHATI',500000,'14-06,11 09.00.00','Admin'),
+(06,'VIPUL','DIWAN',200000,'14-06,11 09.00.00','Acoount'),
+(07,'SATIS','KUMAR',75000,'14-01,20 09.00.00','Acoount'),
+(08,'GITIKA','CHOHAN',90000,'14-04,11 09.00.00','Admin');
+-- SELECT * FROM Workers;
+
+create TABLE BonusT(
+wRef_id INT,
+Bonus_Amount INT(15),
+Bonus_Date DATETIME,
+FOREIGN KEY (wRef_id) 
+REFERENCES Workers(w_id) ON DELETE CASCADE
+);
+INSERT INTO BonusT (wRef_id,Bonus_Amount,Bonus_Date) VALUES 
+(01,5000,'16-02-20'),
+(02,3000,'16-06-11'),
+(03,4000,'16-02-20'),
+(01,4500,'16-02-20'),
+(02,3500,'16-06-11');
+
+-- SELECT * FROM BonusT;
+
+CREATE TABLE TitleT(
+w_id INT,
+WORKER_tITLE CHAR(15),
+Affected_Date DATETIME,
+FOREIGN KEY (w_id)
+REFERENCES Workers(w_id) 
+ON DELETE CASCADE
+);
+
+INSERT INTO TitleT (w_id,WORKER_tITLE,Affected_Date) VALUES
+(01,'MANAGER','2016-02-20 00:00:00'),
+(02,'EXECUTIVE','2016-06-11 00:00:00'),
+(08,'EXECUTIVE','2016-06-11 00:00:00'),
+(05,'MANAGER','2016-06-11 00:00:00'),
+(04,'ASST. MANAGER','2016-06-11 00:00:00;'),
+(07,'EXECUTIVE','2016-06-11 00:00:00'),
+(06,'LEAD','2016-06-11 00:00:00'),
+(03,'LEAD','2016-06-11 00:00:00');
+
+-- SELECT * FROM TitleT;
+
+-- QUESTION1SELECTE WORKER F_NAME USING ASLIAS   
+-- SELECT f_name AS WORKER_NAME FROM Workers;
+
+
+
+-- QUESTION F_NAME OF W IN UPPER CASE
+
+-- SELECT LOWER(f_name) FROM Workers;
+
+
+
+
+-- question 3 
+-- fetch Unique Department from table ..... and also using group by
+
+-- SELECT DEPARTMENT FROM Workers GROUP BY DEPARTMENT;
+-- SELECT DISTINCT DEPARTMENT FROM Workers;
+
