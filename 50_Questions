@@ -6,17 +6,17 @@ w_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 f_name CHAR(25),
 l_name CHAR(25),
 salary INT(15),
-joingData DATETIME,
+joiningDate DATETIME,
 DEPARTMENT CHAR(15)
 );
-INSERT INTO Workers(w_id,f_name,l_name,salary,joingData,DEPARTMENT) VALUES 
-(01,'MONIK    ','ARORA',100000,'14-02-20 09.00.00','HR'),
+INSERT INTO Workers(w_id,f_name,l_name,salary,joiningDate,DEPARTMENT) VALUES 
+(01,'MONIK','ARORA',100000,'14-02-20 09.00.00','HR'),
 (02,'NIHAR','VERMA',80000,'14-06,11 09.00.00','Admin'),
 (03,'VISHA','SINGHAL',300000,'14-02-20 09.00.00','HR'),
-(04,'AMITA','SINGH',500000,'14-02-20 09.00.00','Admin'),
+(04,'AMITAbh','SINGH',500000,'14-02-20 09.00.00','Adminastation'),
 (05,'VIVEK','BHATI',500000,'14-06,11 09.00.00','Admin'),
 (06,'VIPUL','DIWAN',200000,'14-06,11 09.00.00','Acoount'),
-(07,'SATIS','KUMAR',75000,'14-01,20 09.00.00','Acoount'),
+(07,'SATISH','KUMAR',75000,'14-01,20 09.00.00','Acoount'),
 (08,'GITIKA','CHOHAN',90000,'14-04,11 09.00.00','Admin');
 -- SELECT * FROM Workers;
 
@@ -75,3 +75,97 @@ INSERT INTO TitleT (w_id,WORKER_tITLE,Affected_Date) VALUES
 -- SELECT DEPARTMENT FROM Workers GROUP BY DEPARTMENT;
 -- SELECT DISTINCT DEPARTMENT FROM Workers;
 
+-- question 4 
+-- fetch first 3 character of first name from workers 
+
+-- SELECT substring(f_name,1,3) FROM Workers;
+
+
+
+-- Questions 5
+-- find position of b in f name colume 'amitabh' from workers table
+
+
+-- SELECT INSTR(f_name,'b') FROM Workers where f_name ='Amitabh';
+
+
+-- Question 6
+-- write f name from worker trim white space from right side of string 
+
+-- SELECT RTRIM(f_name) from Workers;
+-- -- question 7
+-- SELECT LTRIM(f_name) FROM Workers;
+
+-- Question 8
+-- unique departmates   and lengh of department      
+
+SELECT DISTINCT DEPARTMENT, LENGTH(DEPARTMENT)  FROM Workers;
+
+-- question 9
+-- Replacing a with A
+-- SELECT REPLACE(f_name,'A','a') FROM Workers;
+
+
+
+-- question 10 
+-- combine f_name and last name as complete name , a space should be separate them 
+-- SELECT CONCAT(f_name,' ',l_name) FROM Workers AS COMPLETE_NAME;
+
+
+
+
+-- QUESTION 11
+-- SELECT ALL WORKER DETAILS ORDER BY F_NAME IN ASCENDING ORDER 
+-- SELECT * FROM Workers ORDER BY f_name;
+
+-- question 12
+-- order by name asc and department desc;
+
+-- SELECT * FROM Workers ORDER BY f_name , DEPARTMENT DESC;
+
+-- QUESTIONS 13
+-- PRINT DETAILS OF WORKERS FNAME AS VIPUL AND SATISH
+
+-- SELECT * FROM Workers where f_name IN ('VIPUL','Satis');
+
+-- QUESTIONS 14
+-- PRINT DETAILS OF WORKERS EXCLUDING FNAME AS VIPUL AND SATISH
+
+-- SELECT * FROM Workers where f_name NOT IN ('VIPUL','Satis');
+
+
+-- QUESTIONS 15
+-- PRINT DETAILS OF WORKERS DEPARTMENT AS ADMIN
+
+-- SELECT * FROM Workers where DEPARTMENT='ADMIN';
+
+-- SELECT * FROM Workers where DEPARTMENT LIKE 'ADMIN%';
+
+-- question 16
+-- worker d whose f name contains a
+
+-- SELECT * FROM Workers where f_name LIKE '%A%';
+
+-- question 17
+-- worker d whose f name END WITH a
+
+-- SELECT * FROM Workers WHERE F_NAME LIKE '%A';
+
+
+-- question 18
+-- worker d whose f name END WITH h and contains 6 alphabets .
+
+-- SELECT * FROM Workers where f_name LIKE '_____H';
+
+
+
+-- QUESTIONS 19
+
+-- WORKERS DETAILS WHOSE SALARY IN BETWEEN 100K AND 500K
+SELECT * FROM Workers where salary BETWEEN 100000 and 500000;
+
+
+-- question 20
+-- who joined in feb 2014
+
+SELECT * FROM Workers where YEAR(joiningDate)=2014 and MONTH(joiningDate)=02;
