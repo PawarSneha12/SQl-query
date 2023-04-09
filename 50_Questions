@@ -169,3 +169,72 @@ SELECT * FROM Workers where salary BETWEEN 100000 and 500000;
 -- who joined in feb 2014
 
 SELECT * FROM Workers where YEAR(joiningDate)=2014 and MONTH(joiningDate)=02;
+
+-- SELECT * FROM TitleT;
+
+-- QUESTION 21 
+-- COUNT THE EMPLOOYEES WORKING DEPARTMENT ADMIN
+-- SELECT  DEPARTMENT, COUNT(*) AS Count FROM Workers where DEPARTMENT='Admin';
+
+
+-- QUESTION 22
+-- WORKERS FULL NAME WITH SALARIES >=500000 AND <=100000;
+
+-- SELECT  concat(f_name,' ',l_name) FROM Workers where salary between 50000 and 100000;
+
+
+-- QUESTION 23
+-- FETCH NO. OF WORKER FOR EACH DEPARTMENT IN DESCENDING ORDER 
+
+-- SELECT DEPARTMENT, COUNT(w_id) as NO_OF_WORKER FROM Workers GROUP BY DEPARTMENT ORDER BY NO_OF_WORKER DESC;
+
+-- QUESTION 24 
+-- FETCH DETAILSOF WORKERS WHO HAS LASO AS MANAGER 
+-- SELECT w.* FROM Workers as w INNER JOIN TitleT as t on w.w_id=t.w_id where WORKER_tITLE='MANAGER';
+
+-- QUESTION 25
+-- FETCH NO. OF TITLE MORE THAN ONE OF DIFFERENCT TITLE
+
+-- SELECT WORKER_tITLE,COUNT(*) AS count FROM TitleT GROUP BY WORKER_tITLE HAVING count > 1;
+
+-- Question 26
+-- show only odd numbers of rows 
+-- SELECT * FROM Workers where MOD(w_id,2)!=0;
+
+-- Question 27
+-- show only even numbers of rows 
+
+-- SELECT * FROM Workers where MOD(w_id,2)=0;
+
+-- Question 28
+-- clone a new table from workers tables 
+
+CREATE TABLE newTable LIKE Workers;
+INSERT INTO newTable SELECT * FROM Workers;
+-- select * from newTable;
+
+-- Question 29
+-- fetch intersecting records of two tables 
+-- Inner Join 
+
+SELECT Workers.* FROM Workers inner join newTable ON Workers.w_id=newTable.w_id;
+SELECT Workers.* FROM Workers inner join newTable using(w_id);
+
+
+-- QUESTION 30 
+-- QUERY SHOW ONE TABLE THAT ANOTHER TABLE DOES NOT HAVE 
+-- minuS
+
+SELECT Workers.* FROM Workers LEFT JOIN newTable using(w_id) where newTable.w_id=null;
+
+
+-- QUESTION 31 
+-- SHOW CURRENCT DATE AND TIME
+
+SELECT CURDATE();
+SELECT NOW();
+
+-- QUESTION 32
+-- SHOW TOP N RECORDS OF TABLE ORDER BY DESCENDING SALARY
+
+SELECT * FROM Workers ORDER BY SALARY DESC LIMIT 5;
