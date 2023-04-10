@@ -238,3 +238,91 @@ SELECT NOW();
 -- SHOW TOP N RECORDS OF TABLE ORDER BY DESCENDING SALARY
 
 SELECT * FROM Workers ORDER BY SALARY DESC LIMIT 5;
+
+-- QUESTION 33
+-- determine nth (n=5) salary from table;
+SELECT * FROM Workers ORDER BY SALARY DESC LIMIT 4,1;
+
+-- QUESTION 34
+-- DETERMINE 5 TH HIGHEST SALARY WITHOUT USING LIMIT 
+
+SELECT salary FROM Workers as w1 Where 4=(
+select count(DISTINCT (w.salary)) FROM Workers as w 
+where w.salary >=w1.salary
+);
+
+-- QUESTION 35
+-- FETCH THE LIST OF EMPLOYEES WITH SAME SALARY
+
+SELECT w.* FROM Workers  w ,Workers  w1 where w.salary=w1.salary and w.w_id !=w1.w_id;
+
+-- QUESTION 36
+-- SHOW THE SECOND HIGHEST SALARY FROM S TABLE USING SUB QUERY
+
+SELECT MAX(SALARY) FROM Workers
+where salary not in (SELECT MAX(SALARY) FROM Workers);
+
+
+-- QUESTION 37 
+-- Show one rows in twich in table
+
+-- SELECT * FROM Workers
+-- UNION ALL
+-- SELECT * FROM Workers ORDER BY w_id;
+
+
+-- QUESTION 38
+-- list w_id who does get bonus
+
+SELECT * FROM Workers where w_id not in (SELECT wRef_id FROM BonusT);
+
+-- QUESTION39
+-- FIRST 50% RECORDS FROM A TABLE
+
+SELECT * FROM Workers where w_id <= (SELECT COUNT(w_id)/2 FROM Workers);
+
+
+
+-- QUESTION 40
+-- fetch department that have less than 4 people in it.
+
+SELECT department, count(department) as c FROM Workers group by department having c<4;
+
+
+
+-- QUESTION 41
+-- fetch department along with number of people in each department .
+SELECT department, count(department) as c FROM Workers group by department;
+
+
+-- QUESTION 42 
+-- show last record from table
+
+
+
+ SELECT * FROM Workers WHERE w_id=   (Select max(w_id) FROM Workers);
+ 
+ -- QUESTION 43
+-- show first record from table
+
+SELECT * FROM Workers WHERE w_id=   (Select min(w_id) FROM Workers);
+
+
+-- QUESTION 44
+-- show fetch the last five records from a table
+
+(SELECT * FROM Workers ORDER BY w_id DESC LIMIT 5) ORDER BY w_id;
+
+-- QUESTION 45 
+-- NAME OF EMPLOYYES HAVING HIGHEST SALARY IN EACH DEPARTMENT;
+
+SELECT w.department,w.f_name, w.salary FROM (SELECT DEPARTMENT,MAX(SALARY) as maxS FROM Workers GROUP BY DEPARTMENT) t inner join Workers w on w.department=t.department and t.maxS=w.salary;
+
+-- QUESTION 46 
+-- FETCH THREE MAXIMUM SALARY FROM A TABLE USING CO-RELATED SUBQUERY
+
+SELECT DISTINCT(SALARY) FROM Workers  W where 3>=  (SELECT COUNT(DISTINCT(salary))  FROM Workers w2 where w2.salary>=W.salary) ORDER BY W.SALARY DESC;
+
+SELECT DISTINCT(SALARY) FROM Workers  W where 3<=  (SELECT COUNT(DISTINCT(salary))  FROM Workers w2 where w2.salary>=W.salary) ;
+
+
