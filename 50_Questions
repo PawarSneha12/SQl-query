@@ -1,4 +1,7 @@
+//Sql question 
+
 create DATABASE ORG;
+
 USE ORG;
 -- show DATABASES;
 CREATE TABLE  Workers(
