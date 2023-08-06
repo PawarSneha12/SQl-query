@@ -31,3 +31,39 @@ insert into employeeD values(1,'P1','Executive','2019-01-26'),
 (4,'P3','Manager','2019-11-29'),
 (5,'P2','Manager','2020-08-01');
 select * from employeeD;
+
+
+
+-- q1. find list employee whode salary in between 2l and 3l
+select name from employee
+where salary between 200000 and 300000;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- q1(b)  list employee whose city is same 
+
+select e1.* from employee e1, employee e2
+where e1.city =e2.city and e1.empId <> e2.empId;
+
+----------------------------------------------------
+-- q1(c). find null value in employee table
+select * from employee
+where empId is null;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- q.2 (a) find cumulative sum of employee's salary
+select empId,name ,salary, sum(salary) over (order by empId) as cumulativeSum from employee;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- q2(b) ratio of male and female in company
+select 
+(count( case when gender='M' then 1 end) *100.0/count(*) ) as male_Ratio,
+(count(case when gender='F' then 1 end)*100.0/count(*)) as female_Ratio
+from employee;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- q2(c) fetch 50% records from employee
+select * from employee
+where empId<=(select count(empId)/2 from employee);
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
