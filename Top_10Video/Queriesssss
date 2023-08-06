@@ -1,0 +1,45 @@
+Question 5
+-- Ques. 5 
+
+-- begin with 'A'
+select * from employee
+where name like 'a%';
+
+-- contains 'a' at second place 
+select * from employee
+where name like '_a%';
+
+-- contains 'Y' at second last place
+
+select * from employee 
+where name like '%y_'; 
+
+-- end with 'L' and contains 4 alphabets
+
+select * from employee
+where name like '____l';
+
+-- begin with v and ends with and a
+
+select * from employee
+where name like 'v%a';
+
+------------------------------------------------------------------------------------------------------------------------------------
+--  Ques 5(b)
+-- 1. starting with vowels without duplicate 
+
+select distinct(name) from employee
+where lower(name) REGEXP '^[aeiou]';
+
+
+-- 2. ending with vowels (aeiou) without duplicate
+
+select distinct(name) from employee
+where lower(name) REGEXP '[aeiou]$';
+
+-- 3. starting and ending with vowels (aeiou) without duplicate
+
+select distinct(name) from employee
+where lower(name) REGEXP '^[aeiou].*[aeiou]$';
+
+------------------------------------------------------------------------------------------------------------------------------------
