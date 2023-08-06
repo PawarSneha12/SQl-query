@@ -43,3 +43,34 @@ select distinct(name) from employee
 where lower(name) REGEXP '^[aeiou].*[aeiou]$';
 
 ------------------------------------------------------------------------------------------------------------------------------------
+
+Question. 6 
+Find nth highest salary from employee table with and without using top and limit keywords..........
+
+
+select salary from employee
+order by salary desc
+limit 1 offset 3;
+
+-- 
+select e.salary from employee e
+where 2=(select count(distinct(e2.salary)) from employee e2
+where e2.salary>e.salary);
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+Question . 7
+find duplicate and delete it 
+
+---duplicate
+select * from employee
+group by empId,name,gender,salary,city
+having count(*)>1;
+
+-- delete
+delete from employee
+where empId IN(select empId from employee
+group by empId having count(*)>1);
+------------------------------------------------------------------------------------------------------------------------------------
+
+
