@@ -66,4 +66,26 @@ from employee;
 select * from employee
 where empId<=(select count(empId)/2 from employee);
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- Q3. employee salary but replace the last 2 digits with 'XX'
+
+select empId,name,concat(left(cast(salary as char),length(cast(salary as char))-2),'XX') as marked_number
+from employee;
+
+
+select empId,name,concat(left(salary,length(salary)-2),'XX') as new_salary
+from employee;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- Q4. fetch even and odd rows from employee table
+select *
+from employee
+where MOD(empId,2)=0;
+
+SELECT * 
+FROM employee
+where MOD(empId,2)=1;
+select *
+FROM employee
+where empId%2=0;
+------------------------------------------------------------------------------------------------------------------------------------------------------------
 
