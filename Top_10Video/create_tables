@@ -1,0 +1,33 @@
+//
+-- create TABLE EMPLOYEE
+CREATE TABLE EMPLOYEE (
+  empId int NOT NULL,
+  name varchar(20),
+  gender char(1),
+  salary integer,
+  city char(20));
+
+-- -- insert
+INSERT INTO EMPLOYEE VALUES (1, 'Anjun','M',75000, 'Pune'),
+(2,'Ekdanya','M',125000,'Banglore'),
+(3,'Lalita','F',150000,'Mathura'),
+(4,'Madhav','M',250000,'Delhi'),
+(5,'Visakha','F',120000,'Mathura');
+
+
+
+-- -- fetch 
+SELECT * FROM EMPLOYEE ;
+
+create table employeeD(
+empId int not null,
+project varchar(20),
+e_position varchar(20),
+doj date);
+
+insert into employeeD values(1,'P1','Executive','2019-01-26'),
+(2,'P2','Executive','2020-05-04'),
+(3,'P1','Lead','2021-10-21'),
+(4,'P3','Manager','2019-11-29'),
+(5,'P2','Manager','2020-08-01');
+select * from employeeD;
