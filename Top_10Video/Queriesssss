@@ -72,5 +72,49 @@ delete from employee
 where empId IN(select empId from employee
 group by empId having count(*)>1);
 ------------------------------------------------------------------------------------------------------------------------------------
+-- select e.name,e.empId,d.project from employeeD d,employeeD d1
+-- inner join employee e
+-- using(empId)
+-- where d.project=d1.project
+-- and d.empId!=d1.empId;
+------------------------------------------------------------------------------------------------------------------------------------
+-- ques 8 employees highest salary for each project 
+select ed.project,max(e.salary) as projectSal,sum(e.salary) as totalProjectSal,
+count(e.empId) as numberOfEmployee
+from employee as e
+inner join
+employeeD as ed
+on e.empId=ed.empId
+group by project
+order by projectSal desc;
+------------------------------------------------------------------------------------------------------------------------------------
+-- Ques .9 total number of employee joined each year
 
+select year(ed.doj) as y,count(*) as Number from employeeD as ed
+inner join employee as e
+on ed.empId=e.empId
+group by y
+order by y;
 
+------------------------------------------------------------------------------------------------------------------------------------
+
+-- q.10 Create 3 grp based on salary column salary less the 1l is low,
+-- in between 1-2l medium and >2l is high
+
+select name,salary,
+case 
+when salary>200000 then 'High'
+when salary between 100000 and 200000 then 'Medium'
+else 'low'
+end as salaryStatus
+from employee;
+
+------------------------------------------------------------------------------------------------------------------------------------
+-- total salary for each city 
+select empId, name, 
+sum(case 
+when city='Mathura' then salary end ) as Mathura,
+sum(case when city='Pune' then salary end) as Pune,
+sum(case when city='Delhi' then salary end)as Delhi
+from employee
+group by empId,name;
